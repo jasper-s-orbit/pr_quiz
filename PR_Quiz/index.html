@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Realization Exam Prep Quiz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Open Graph Meta Tags for Link Preview -->
+    <meta property="og:title" content="Product Realization Quiz Challenge!">
+    <meta property="og:description" content="Test your knowledge on Product Realization concepts! Prepare for your exams with this interactive quiz.">
+    <meta property="og:image" content="https://placehold.co/1200x630/2563eb/ffffff?text=Product+Realization+Quiz">
+    <meta property="og:url" content="https://yourdomain.com/quiz"> <!-- IMPORTANT: Update with your actual quiz URL -->
+    <meta property="og:type" content="website">
+    <!-- End Open Graph Meta Tags -->
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+
+    <div id="quiz-app" class="quiz-container show"> <!-- Always visible -->
+        <div id="start-screen" class="text-center">
+            <h1 class="text-4xl font-bold text-gray-800 mb-6">Production Realization Exam Prep Quiz</h1>
+            <p class="text-lg text-gray-600 mb-4">Ready to test your knowledge on Product Realization concepts? Let's begin!</p>
+            <input type="text" id="user-name-input" class="input-field" placeholder="Enter your name to start" maxlength="30">
+            <button id="start-button" class="start-button">Start Quiz</button>
+        </div>
+
+        <div id="challenge-intro-screen" class="hidden text-center">
+            <h1 class="text-4xl font-bold text-gray-800 mb-6">Challenge Accepted!</h1>
+            <div class="challenge-info">
+                <p class="mb-2">You are challenging <span id="challenger-name-display" class="font-bold"></span>'s score of <span id="challenger-score-display" class="font-bold"></span> out of <span id="challenger-total-display" class="font-bold"></span>.</p>
+                <p id="challenger-speed-display" class="mb-2"></p>
+                <p id="challenger-proficiency-display" class="mb-4"></p>
+                <p class="mb-4">Enter your name to take on the challenge!</p>
+                <input type="text" id="challenger-name-input" class="input-field" placeholder="Your name" maxlength="30">
+            </div>
+            <button id="start-challenge-button" class="start-button">Start Challenge</button>
+        </div>
+
+        <div id="quiz-screen" class="hidden">
+            <div id="quiz-header" class="mb-6">
+                 <div class="flex justify-between items-center text-gray-600 mb-2">
+                    <p id="question-count" class="text-sm font-semibold">Question 1 of 20</p>
+                    <p id="timer-text" class="text-sm font-semibold">Time: 35s</p>
+                </div>
+                <div id="timer-container" class="w-full bg-gray-200 rounded-full h-2.5">
+                     <div id="timer-bar" class="bg-gradient-to-r from-indigo-500 to-blue-500 h-2.5 rounded-full" style="width: 100%;"></div>
+                </div>
+            </div>
+            <!-- New wrapper div for question text -->
+            <div class="question-text-wrapper">
+                <h2 id="question-text" class="font-semibold text-gray-900 leading-relaxed"></h2>
+            </div>
+            <div id="options-container" class="grid grid-cols-1 gap-4"></div>
+        </div>
+
+        <div id="score-card" class="score-card hidden">
+            <div id="score-icon-display" class="score-icon"></div>
+            <h3 id="score-text" class="text-3xl font-bold text-gray-800 mb-4"></h3>
+            <!-- New dashboard elements -->
+            <p id="average-speed-display" class="text-lg text-gray-600 mb-2"></p>
+            <p id="proficiency-score-display" class="text-lg font-bold mb-4"></p>
+            <!-- End new dashboard elements -->
+            <p id="score-review" class="text-lg text-gray-600 mb-8"></p>
+            <div id="challenge-outcome-message" class="text-xl font-semibold text-blue-700 mb-4 hidden"></div>
+            <div class="flex flex-col items-center gap-4">
+                <button id="review-answers-button" class="start-button bg-purple-600 hover:bg-purple-700">Review Wrong Answers</button>
+                <button id="restart-button" class="start-button">Play Again</button>
+                <div id="share-section" class="w-full">
+                    <p class="text-gray-700 font-semibold mb-2">Share your score and challenge others!</p>
+                    <div class="social-share-buttons">
+                        <button id="share-whatsapp" class="whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</button>
+                        <button id="share-facebook" class="facebook"><i class="fab fa-facebook-f"></i> Facebook</button>
+                        <button id="share-pinterest" class="pinterest"><i class="fab fa-pinterest-p"></i> Pinterest</button>
+                        <button id="share-teams" class="teams"><i class="fab fa-microsoftteams"></i> Teams</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Wrong Answers Review -->
+    <div id="wrong-answers-modal" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50 p-4 hidden modal-overlay">
+        <div class="bg-white p-6 rounded-lg shadow-xl max-w-2xl w-full modal-content">
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">Review Your Answers</h3>
+            <div id="wrong-answers-list">
+                <!-- Wrong answers will be injected here -->
+            </div>
+            <button class="mt-6 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600" onclick="document.getElementById('wrong-answers-modal').classList.add('hidden')">Close</button>
+        </div>
+    </div>
+
+    <!-- Guide Modal (New) -->
+    <div id="guide-modal" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50 p-4 modal-overlay hidden">
+        <div class="bg-white p-6 rounded-lg shadow-xl max-w-xl w-full text-center modal-content">
+            <h3 class="text-3xl font-bold text-gray-800 mb-4">Welcome! How to Play This Quiz</h3>
+            <p class="text-lg text-gray-700 mb-6">
+                This is a **fill-in-the-blank** quiz. You'll see sentences with missing words, indicated by blank spaces like this:
+            </p>
+            <div class="mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                <p class="text-lg text-gray-800 font-medium mb-4">
+                    "This is a demo <span id="demo-blank-text" class="blank-placeholder-demo">____</span> question."
+                </p>
+                <button id="demo-fill-button" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors">
+                    Try it!
+                </button>
+            </div>
+            <p class="text-lg text-gray-700 mb-6">
+                Below each question, you'll find multiple-choice options. Select the option that correctly fills all the blanks in the sentence.
+            </p>
+            <button id="close-guide-button" class="start-button">Got It! Start Quiz</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

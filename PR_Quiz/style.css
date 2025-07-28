@@ -1,0 +1,249 @@
+body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1rem;
+            overflow-x: hidden;
+        }
+        .quiz-container {
+            background-color: #ffffff;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            padding: 2rem;
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            transition: all 0.5s ease-in-out;
+            opacity: 1; /* Always visible and ready to fade in */
+            transform: translateY(0); /* Always in place */
+        }
+        /* No .quiz-container.show needed anymore for initial display */
+
+        .option-button {
+            background-color: #e2e8f0;
+            color: #334155;
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.75rem;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            text-align: left;
+            width: 100%;
+            /* Responsive font size for options */
+            font-size: 1rem; /* Base size for mobile (text-base) */
+            @media (min-width: 640px) { /* sm breakpoint */
+                font-size: 1.125rem; /* text-lg */
+            }
+            border: 1px solid transparent;
+        }
+        .option-button:hover:not(.disabled) {
+            background-color: #cbd5e1;
+            transform: translateY(-2px);
+        }
+        .option-button.correct {
+            background-color: #d1fae5;
+            color: #065f46;
+            border-color: #34d399;
+        }
+        .option-button.incorrect {
+            background-color: #fee2e2;
+            color: #991b1b;
+            border-color: #ef4444;
+        }
+        .option-button.disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        #timer-bar {
+            transition: width 1s linear; /* Animate width change over 1 second */
+        }
+        .time-low-pulse {
+             background-image: linear-gradient(to right, #ef4444, #b91c1c);
+             animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
+        .score-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            background-color: #f8fafc;
+            border-radius: 1.5rem;
+            margin-top: 2rem;
+            box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.5s ease-in-out;
+        }
+        .score-card.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .score-icon {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 1.5rem;
+        }
+        .start-button {
+            background-color: #4f46e5;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .start-button:hover {
+            background-color: #4338ca;
+            transform: translateY(-2px);
+        }
+        .start-button:active {
+            transform: translateY(0);
+            box-shadow: none;
+        }
+        .social-share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap; /* Added for responsiveness */
+        }
+        .social-share-buttons button {
+            background-color: #6b7280;
+            color: white;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background-color 0.3s ease;
+            flex-grow: 1; /* Allow buttons to grow */
+            justify-content: center; /* Center content in buttons */
+        }
+        .social-share-buttons button:hover {
+            background-color: #4b5563;
+        }
+        .social-share-buttons .whatsapp { background-color: #25D366; }
+        .social-share-buttons .whatsapp:hover { background-color: #1DA851; }
+        .social-share-buttons .facebook { background-color: #1877F2; }
+        .social-share-buttons .facebook:hover { background-color: #145CB3; }
+        .social-share-buttons .pinterest { background-color: #E60023; }
+        .social-share-buttons .pinterest:hover { background-color: #B3001C; }
+        .social-share-buttons .teams { background-color: #6264A7; }
+        .social-share-buttons .teams:hover { background-color: #4A4C84; }
+
+        .challenge-info {
+            background-color: #e0f2fe;
+            border: 1px solid #90cdf4;
+            color: #2c5282;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        .input-field {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 0.75rem;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+        @media (max-width: 640px) {
+            .quiz-container { padding: 1.5rem; }
+            .option-button { font-size: 1rem; padding: 0.6rem 1rem; }
+            .score-icon { width: 60px; height: 60px; }
+            .start-button { padding: 0.8rem 1.5rem; font-size: 1.1rem; }
+            .social-share-buttons { flex-wrap: wrap; }
+            .social-share-buttons button { width: calc(50% - 0.5rem); justify-content: center; }
+        }
+
+        /* Color classes for score */
+        .text-red-600 { color: #dc2626; }
+        .text-orange-600 { color: #ea580c; }
+        .text-yellow-600 { color: #eab308; }
+        .text-lime-600 { color: #65a30d; }
+        .text-green-600 { color: #16a34a; }
+
+        /* Modal styling */
+        .modal-overlay {
+            background-color: rgba(0, 0, 0, 0.75);
+        }
+        .modal-content {
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        /* Fill-in-the-blank specific styles */
+        .blank-placeholder {
+            display: inline-block;
+            min-width: 50px; /* Ensure blank has some width */
+            text-decoration: none; /* Remove default underline */
+            background-color: #f8fafc; /* Light background for the blank */
+            border: 1px solid #cbd5e1; /* Subtle border */
+            border-radius: 4px; /* Slightly rounded corners */
+            padding: 2px 6px; /* Internal padding */
+            color: #2563eb; /* Blue for filled text */
+            font-weight: 600;
+            margin: 0 4px; /* Space around blanks */
+            transition: all 0.5s ease-out; /* Animation for filling */
+            opacity: 1; /* Always visible */
+            transform: translateY(0); /* Always in place */
+        }
+        /* Style for the demo blank placeholder */
+        .blank-placeholder-demo {
+            display: inline-block;
+            min-width: 50px;
+            text-decoration: none;
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            padding: 2px 6px;
+            margin: 0 4px;
+            transition: all 0.5s ease-out;
+            /* Initial state for demo blank */
+            color: #6b7280; /* A lighter gray to indicate it's empty */
+            font-weight: 400; /* Normal weight when empty */
+        }
+        /* Class to apply when demo blank is filled */
+        .blank-placeholder-demo.filled {
+            color: #2563eb; /* Blue for filled text */
+            font-weight: 600; /* Bold when filled */
+        }
+
+        /* Ensure text parts and blanks flow correctly within the question */
+        #question-text span {
+            display: inline; /* Keep all spans inline by default */
+        }
+        /* Responsive font size for question text */
+        #question-text {
+            font-size: 1.25rem; /* text-xl for small screens */
+            line-height: 1.6; /* Increased line-height for better spacing */
+            text-align: center; /* Ensure text is centered */
+        }
+        @media (min-width: 640px) { /* sm breakpoint */
+            #question-text {
+                font-size: 1.5rem; /* text-2xl for larger screens */
+            }
+        }
+        /* Container for the question text to handle centering */
+        .question-text-wrapper {
+            min-height: 100px; /* Maintain height */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem; /* Matches mb-8 on original h2 */
+        }
