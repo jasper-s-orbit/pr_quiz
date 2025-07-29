@@ -3630,7 +3630,7 @@
             else if (currentProficiency >= 50) achievement = "a good score";
             else achievement = "a solid score";
 
-            return encodeURIComponent(`${userName} achieved ${achievement} (${score}/${totalQuestionsPerSession}) on the Entrepreneurship Exam Prep Quiz! Think you can beat my score?`);
+            return encodeURIComponent(`${userName} achieved ${achievement} (${score}/${totalQuestionsPerSession}) on the Product Realization Exam Prep Quiz! Think you can beat my score?`);
         }
         
         function setupShareListeners() {
@@ -3689,7 +3689,7 @@
             wrongAnswersList.innerHTML = ''; // Clear previous content
 
             if (wrongAnswersLog.length === 0) {
-                wrongAnswersList.innerHTML = '<p class="text-gray-600 text-center">Great job! You got all questions correct or answered them all within the time limit!</p>';
+                wrongAnswersList.innerHTML = '<p class="text-gray-600 text-center">Great job! You answered all questions correctly or within the time limit!</p>';
             } else {
                 wrongAnswersLog.forEach((item, index) => {
                     const div = document.createElement('div');
