@@ -40,7 +40,7 @@
                     "Digital"
                 ],
                 correctAnswer: "Project-Based",
-                explanation: "Project-Based production is characterized by large, complex, one-off endeavors."
+                explanation: "Large, complex, one-off endeavors characterize project-based production."
             },
             {
                 id: 'PROD_3',
@@ -3754,3 +3754,4 @@
             }
         });
         closeGuideButton.addEventListener('click', closeGuide);
+
